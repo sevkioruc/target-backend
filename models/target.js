@@ -17,6 +17,10 @@ const targetSchema = mongoose.Schema({
 	targetScore: {
 		type: Number,
 		required: true
+	},
+	finishedDate: {
+		type: Date,
+		required: true
 	}
 },
 	{
