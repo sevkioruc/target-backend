@@ -6,7 +6,7 @@ exports.create = async (req, res, next) => {
 			userId: req.user.id,
 			title: req.body.title,
 			targetScore: req.body.targetScore,
-			finishedDAte: req.body.finishedDAte
+			finishedDate: req.body.finishedDate
 		})
 		await target.save()
 		res.status(201).send({ msg: 'target was creted successfully' })
