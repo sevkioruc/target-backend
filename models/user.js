@@ -29,7 +29,10 @@ const userSchema = new mongoose.Schema({
 		default: () => crypto.randomBytes(20).toString('hex'),
 	},
 },
-    {timestamps: true})
+	{
+		timestamps: true
+	}
+)
 
 async function generateHash(password) {
 	return bcrypt.hash(password, 12);
