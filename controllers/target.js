@@ -2,12 +2,20 @@ const Target = require('../models/target')
 
 exports.create = async (req, res, next) => {
 	try {
+		const currentDate = new Date()
+		const finishedDate = new Date(req.body.finishedDate)
+
+		if (finishedDate < currentDate) {
+			return res.status(400).send({ msg: 'Finished date cannot be old than now' })
+		}
+
 		const target = new Target({
 			userId: req.user.id,
 			title: req.body.title,
 			targetScore: req.body.targetScore,
 			finishedDate: req.body.finishedDate
 		})
+
 		await target.save()
 		res.status(201).send({ msg: 'target was creted successfully' })
 	} catch (err) {
@@ -31,12 +39,22 @@ exports.update = async (req, res, next) => {
 	try {
 		let target = await Target.findOne({ _id: req.params.targetId, userId: req.user.id })
 
-		if (!target)
+		if (!target) {
 			return res.status(400).send({ msg: 'Could not find target' })
+		}
+
+		const currentDate = new Date()
+		const finishedDate = new Date(req.body.finishedDate)
+
+		if (finishedDate < currentDate) {
+			return res.status(400).send({ msg: 'Finished date cannot be old than now' })
+		}
 
 		target.title = req.body.title
 		target.currentScore = req.body.currentScore
 		target.targetScore = req.body.targetScore
+		target.finishedDate = req.body.finishedDate
+
 		await target.save()
 
 		res.status(200).send({ msg: 'target was updated successfully' })
