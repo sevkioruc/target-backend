@@ -6,6 +6,8 @@ const setupPassport = require('./lib/passport')
 
 require('./database-connection')
 
+require('./services/dailyCronService')
+
 const app = express()
 
 app.engine('.ejs', ejs.__express)
@@ -43,5 +45,6 @@ app.use(async (req, res, next) => {
 // Routes
 require('./routes/auth')(app)
 require('./routes/target')(app)
+require('./routes/report')(app)
 
 module.exports = app
