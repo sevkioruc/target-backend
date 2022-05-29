@@ -6,6 +6,6 @@ exports.getAllFinishedTargetsOnYesterday = async (req, res) => {
 			$gte: req.query.yesterday,
 			$lt: req.query.today
 		}
-	})
+	}).populate({ path: 'user', select: 'email username' })
 	res.status(200).json({ targets })
 }

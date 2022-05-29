@@ -7,7 +7,8 @@ exports.getAllFinishedTargetsOnToday = () => {
 
 	axios.get(`${config.BASE_URL}/v1/report?today=${today}&yesterday=${yestarday}`)
 		.then((res) => {
-			console.log(res.data)
+			const targets = res.data.targets
+			console.log(targets)
 		})
 		.catch((err) => {
 			console.log(err)
