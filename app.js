@@ -8,6 +8,8 @@ require('./database-connection')
 
 require('./services/dailyCronService')
 
+require('./rabbitmq-connection')
+
 const app = express()
 
 app.engine('.ejs', ejs.__express)

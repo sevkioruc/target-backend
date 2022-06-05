@@ -8,5 +8,6 @@ module.exports = {
 	COOKIE_SEESION_KEY_2: process.env.COOKIE_SEESION_KEY_2,
 	AUTH_EMAIL: process.env.AUTH_EMAIL,
 	AUTH_PASS: process.env.AUTH_PASS,
-	BASE_URL: process.env.BASE_URL
+	BASE_URL: process.env.BASE_URL,
+	AMQP_URL: process.env.AMQP_URL
 }
