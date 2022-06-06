@@ -1,3 +1,5 @@
+const { transporter } = require('../services/emailService')
+const config = require('../config')
 let channel
 
 exports.startConsumer = connection => {
@@ -10,6 +12,18 @@ exports.startConsumer = connection => {
 }
 
 function sendEmail(message) {
-	console.log(message.content.toString())
+	const resultOftargets = JSON.parse(message.content.toString())
+
+	resultOftargets.forEach(result => {
+		let message = result.currentScore >= result.targetScore ?
+			'Congratulations. You have reached your target!!' : 'You did not reach your target. Please dont give up.'
+
+		transporter.sendMail({
+			from: config.AUTH_EMAIL,
+			to: result.userId.email,
+			subject: 'Target Result',
+			html: `Hello ${result.userId.username}, <br> ${message}`
+		})
+	})
 	channel.ack(message)
 }
