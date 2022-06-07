@@ -28,6 +28,10 @@ const userSchema = new mongoose.Schema({
 		unique: true,
 		default: () => crypto.randomBytes(20).toString('hex'),
 	},
+	targets: [{
+		type: mongoose.Schema.Types.ObjectId,
+		ref: 'Target'
+	}]
 },
 	{
 		timestamps: true
