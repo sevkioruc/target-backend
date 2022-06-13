@@ -1,0 +1,21 @@
+version: '3.9'
+
+services:
+  api:
+    container_name: node
+    build: .
+    restart: always
+    ports:
+      - 3000:3000
+    env_file: .env
+    depends_on:
+      - mongo_db
+  mongo_db:
+    image: mongo
+    restart: always
+    ports:
+      - 27017:27017
+    volumes:
+      - ./mongo_db:/data/db
+volumes:
+  mongo_db: {}
